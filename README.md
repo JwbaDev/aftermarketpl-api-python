@@ -1,4 +1,28 @@
-# aftermarketpl
+# AfterMarket.pl API client class for Python
+
+This library allows you to issue calls to the AfterMarket.pl public API from Python 2 and Python 3.
+
+## Quick start
+
+Install the library using pip:
+
+```
+pip install aftermarketpl
+```
+
+Create the API client object, providing your API key.
+[Click here to obtain your API key.](https://www.aftermarket.pl/API/Create/)
+
+```python
+client = aftermarketpl.Client('<MY API KEY>', '<MY API SECRET>')
+```
+
+Call an API function and obtain a result.
+[Click here to see the list of API functions.](https://json.aftermarket.pl/)
+
+```python
+result = client.send('/domain/check', {'names[]': ['domain1.pl', 'domain2.pl']})
+```
 
 ## Examples
 
@@ -31,8 +55,8 @@ import asyncio
 async def main():
   client = aftermarketpl.Client('<MY API KEY>', '<MY API SECRET>')
   loop = asyncio.get_event_loop()
-  future1 = loop.run_in_executor(None, client.send, '/domain/check', {'names': ['check-1.pl','check-2.pl']})
-  future2 = loop.run_in_executor(None, client.send, '/domain/check', {'names': ['check-3.pl','check10.pl']})
+  future1 = loop.run_in_executor(None, client.send, '/domain/check', {'names[]': ['check-1.pl','check-2.pl']})
+  future2 = loop.run_in_executor(None, client.send, '/domain/check', {'names[]': ['check-3.pl','check10.pl']})
   return await future1, future2
 
 loop = asyncio.get_event_loop()
@@ -64,7 +88,6 @@ loop.run_until_complete(main())
 ```
 import aftermarketpl
 from aftermarketpl import APIException
-
 
 client = aftermarketpl.Client('<MY API KEY>', '<MY API SECRET>')
 
